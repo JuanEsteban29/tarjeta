@@ -189,7 +189,7 @@
             <span class="date-day">11</span>
             <div class="date-meta">
               <b>DICIEMBRE</b>
-              <small>VIERNES · 2026</small>
+              <small>VIERNES · 2026 · 8:00 P.M.</small>
             </div>
           </div>
 
@@ -202,17 +202,33 @@
             </div>
           </div>
 
-          <div class="venue-card">
-            <div class="venue-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
+          <!-- TARJETAS DE INFORMACIÓN: LUGAR Y VESTIMENTA -->
+          <div class="info-cards-grid">
+            <div class="venue-card">
+              <div class="venue-icon-wrap">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div class="venue-info">
+                <small>EL LUGAR DEL ENCUENTRO</small>
+                <h3>Granja Mano Vieja</h3>
+                <p>Hora de recepción: <strong>8:00 P.M.</strong></p>
+              </div>
             </div>
-            <div class="venue-info">
-              <small>EL LUGAR DEL ENCUENTRO</small>
-              <h3>Granja Mano Vieja</h3>
-              <p>Te esperamos para vivir este misterio juntos.</p>
+
+            <div class="dress-card">
+              <div class="dress-icon-wrap">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path>
+                </svg>
+              </div>
+              <div class="dress-info">
+                <small>CÓDIGO DE VESTIMENTA</small>
+                <h3>Traje Formal</h3>
+                <p class="dress-note">Se reservan los colores <strong>gris</strong> y <strong>negro</strong> para la quinceañera.</p>
+              </div>
             </div>
           </div>
 
@@ -245,7 +261,7 @@
           <p class="eyebrow">CAPÍTULO V · LA HORA DECISIVA</p>
           <h2>Cuando las agujas<br>marquen la <em>hora convenida…</em></h2>
           <p>No permitas que la medianoche te sorprenda lejos. Cada segundo cuenta antes de que las puertas del misterio se abran para esta noche irrepetible.</p>
-          <div class="time-note">11 · 12 · 2026</div>
+          <div class="time-note">11 · 12 · 2026 · 8:00 P.M.</div>
         </div>
       </section>
 
@@ -299,15 +315,6 @@
       
       <label for="guestName">Tu nombre completo</label>
       <input id="guestName" type="text" placeholder="Escribe tu nombre" autocomplete="name">
-      
-      <label for="guestCount">¿Cuántas personas asistirán?</label>
-      <select id="guestCount">
-        <option value="1">1 persona</option>
-        <option value="2">2 personas</option>
-        <option value="3">3 personas</option>
-        <option value="4">4 personas</option>
-        <option value="5">5 personas</option>
-      </select>
       
       <div class="attendance-choice">
         <button type="button" class="choice active" data-answer="¡Sí, allí estaré!">¡Sí, asistiré!</button>

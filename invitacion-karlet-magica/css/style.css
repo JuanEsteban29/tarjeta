@@ -863,20 +863,27 @@ img {
   color: var(--gold-muted);
 }
 
-.venue-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 760px;
+  margin: 0 auto 28px;
   text-align: left;
-  border: 1px solid rgba(207, 171, 104, 0.25);
-  background: rgba(18, 14, 25, 0.7);
-  padding: 24px 28px;
-  border-radius: 3px;
-  margin-bottom: 28px;
 }
 
-.venue-icon-wrap {
+.venue-card, .dress-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid rgba(207, 171, 104, 0.3);
+  background: rgba(18, 14, 25, 0.72);
+  padding: 22px 24px;
+  border-radius: 3px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.venue-icon-wrap, .dress-icon-wrap {
   color: var(--gold);
   flex-shrink: 0;
   display: flex;
@@ -884,25 +891,42 @@ img {
   justify-content: center;
 }
 
-.venue-info small {
+.venue-info small, .dress-info small {
   font-family: "Marcellus", serif;
   font-size: 9px;
   letter-spacing: 2px;
   color: var(--gold);
+  display: block;
+  margin-bottom: 2px;
 }
 
-.venue-info h3 {
+.venue-info h3, .dress-info h3 {
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(26px, 4vw, 34px);
+  font-size: clamp(24px, 3.8vw, 30px);
   font-weight: 600;
-  margin: 4px 0 6px;
+  margin: 2px 0 4px;
   color: var(--paper);
 }
 
-.venue-info p {
+.venue-info p, .dress-info p {
   color: var(--paper-dim);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.4;
+  margin: 0;
+}
+
+.venue-info strong {
+  color: var(--gold-bright);
+}
+
+.dress-note {
+  color: #d1b88c !important;
+}
+
+.dress-note strong {
+  color: #fff;
+  border-bottom: 1px dashed var(--gold);
+  padding-bottom: 1px;
 }
 
 .map-button {
@@ -1398,15 +1422,21 @@ footer b {
     font-size: 7px;
   }
 
-  .venue-card {
+  .info-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .venue-card, .dress-card {
     flex-direction: column;
     text-align: center;
-    padding: 22px 18px;
+    padding: 20px 16px;
     gap: 12px;
   }
 
-  .venue-info h3 {
-    font-size: 26px;
+  .venue-info h3, .dress-info h3 {
+    font-size: 24px;
   }
 
   /* Reloj */

@@ -106,9 +106,9 @@ function updateProgress() {
 window.addEventListener("scroll", updateProgress, { passive: true });
 window.addEventListener("resize", updateProgress);
 
-// Cuenta regresiva precisa hacia el 11 de diciembre de 2026
+// Cuenta regresiva precisa hacia el 11 de diciembre de 2026 a las 8:00 P.M.
 function updateCountdown() {
-  const target = new Date("2026-12-11T18:00:00");
+  const target = new Date("2026-12-11T20:00:00");
   const now = new Date();
   let diff = Math.max(0, target - now);
 
@@ -193,7 +193,6 @@ $$(".choice").forEach((btn) => {
 $("#sendRsvp").addEventListener("click", () => {
   const nameInput = $("#guestName");
   const name = nameInput.value.trim();
-  const count = $("#guestCount").value;
 
   if (!name) {
     nameInput.focus();
@@ -201,17 +200,9 @@ $("#sendRsvp").addEventListener("click", () => {
     return;
   }
 
-  // Reemplazar con el número de WhatsApp correspondiente (con código de país, sin +)
-  const whatsappNumber = "000000000000";
-  const message = `Hola, soy ${name}. ${attendance} Seremos ${count} persona(s). Confirmación para los XV de Karlet Alvarado, el 11 de diciembre de 2026 en Granja Mano Vieja.`;
-
-  if (whatsappNumber === "000000000000") {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(message);
-    }
-    showToast("Configura el WhatsApp en js/main.js para enviar");
-    return;
-  }
+  // Número oficial de confirmación (WhatsApp Venezuela: 584145085368)
+  const whatsappNumber = "584145085368";
+  const message = `Hola, soy ${name}. ${attendance} Confirmación para los XV de Karlet Alvarado, el 11 de diciembre de 2026 a las 8:00 P.M. en Granja Mano Vieja.`;
 
   window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
   closeModal();
