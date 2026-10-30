@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#09080e">
+  <meta name="description" content="Una invitación enigmática a los XV años de Karlet Alvarado.">
+  <title>Los XV de Karlet | Una noche de misterio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- FONDO MISTERIOSO: NIEBLA Y PENUMBRA -->
+  <div class="ambient" aria-hidden="true">
+    <div class="mist-wrap">
+      <div class="mist-layer"></div>
+      <div class="mist-layer mist-layer-two"></div>
+    </div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+  </div>
+  <div class="vignette-overlay" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- CONTROL DE MÚSICA -->
+  <button class="sound-toggle" id="soundToggle" aria-label="Activar o pausar música">
+    <svg class="sound-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 18V5l12-2v13"></path>
+      <circle cx="6" cy="18" r="3"></circle>
+      <circle cx="18" cy="16" r="3"></circle>
+    </svg>
+    <span id="soundLabel">Música</span>
+  </button>
+  <audio id="bgMusic" loop preload="auto" playsinline>
+    <source src="assets/music/alices-theme.mp3" type="audio/mpeg">
+  </audio>
+
+  <main>
+    <!-- PORTAL DE ENTRADA -->
+    <section class="portal-screen" id="portal">
+      <div class="portal-frame">
+        <span class="frame-corner corner-tl"></span>
+        <span class="frame-corner corner-tr"></span>
+        <span class="frame-corner corner-bl"></span>
+        <span class="frame-corner corner-br"></span>
+
+        <div class="portal-topline">UNA INVITACIÓN ENVUELTA EN MISTERIO</div>
+        
+        <div class="keyhole-wrap">
+          <svg class="keyhole-svg" viewBox="0 0 24 32" width="28" height="38" fill="currentColor" aria-hidden="true">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 4.22 2.18 7.93 5.49 10.08L3 32h18l-2.49-9.92C21.82 19.93 24 16.22 24 12c0-6.627-5.373-12-12-12zm0 4a8 8 0 0 1 8 8c0 3.23-1.91 6.02-4.66 7.28L17.5 28h-11l2.16-8.72A7.994 7.994 0 0 1 4 12a8 8 0 0 1 8-8z"/>
+          </svg>
+        </div>
+
+        <p class="eyebrow">EL SECRETO ESTÁ A PUNTO DE REVELARSE</p>
+        <h1>¿Te atreves a develar<br>el <em>misterio oculto</em><br>tras el espejo?</h1>
+        <p class="portal-copy">Una velada enigmática e inolvidable te aguarda en la penumbra.</p>
+        
+        <button class="magic-button" id="enterButton">
+          <span>Cruzar el umbral</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+        <div class="portal-foot">TOCA PARA DESCUBRIR LA INVITACIÓN</div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA PRINCIPAL -->
+    <section class="experience hidden" id="experience">
+      <nav class="story-nav">
+        <span class="nav-mark">K · <span>XV</span></span>
+        <div class="nav-progress"><i id="progressBar"></i></div>
+        <span class="chapter" id="chapterLabel">CAPÍTULO I</span>
+      </nav>
+
+      <!-- CAPÍTULO I: EL COMIENZO -->
+      <section class="story-section hero-story" data-chapter="I">
+        <div class="hero-image-wrap reveal">
+          <div class="photo-frame">
+            <span class="frame-corner corner-tl"></span>
+            <span class="frame-corner corner-tr"></span>
+            <span class="frame-corner corner-bl"></span>
+            <span class="frame-corner corner-br"></span>
+            <div class="photo-frame-inner">
+              <img src="assets/images/portada-karlet.jpg" alt="Invitación original de los XV años de Karlet">
+              <div class="image-vignette"></div>
+            </div>
+            <div class="hero-stamp">
+              <span class="stamp-sub">XV AÑOS · KARLET</span>
+              <span class="stamp-title">UNA NOCHE ENIGMÁTICA</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-intro reveal">
+          <p class="eyebrow">CAPÍTULO I · EL COMIENZO DEL ENIGMA</p>
+          <h2>Hay secretos<br>que solo se revelan <em>una vez en la vida.</em></h2>
+          <p>Entre sombras y destellos de oro viejo, el tiempo se detiene para abrir paso a una velada mágica que jamás olvidarás.</p>
+          <div class="scroll-cue"><span></span> DESLIZA PARA CONTINUAR</div>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO II: EL SENDERO -->
+      <section class="story-section wonder-section" data-chapter="II">
+        <div class="section-heading reveal">
+          <p class="eyebrow">CAPÍTULO II · EL SENDERO OCULTO</p>
+          <h2>Todo comienza<br>al cruzar el <em>umbral prohibido.</em></h2>
+        </div>
+        <div class="image-story reveal">
+          <div class="photo-frame">
+            <span class="frame-corner corner-tl"></span>
+            <span class="frame-corner corner-tr"></span>
+            <span class="frame-corner corner-bl"></span>
+            <span class="frame-corner corner-br"></span>
+            <div class="photo-frame-inner">
+              <img src="assets/images/escalera-maravillas.jpg" alt="Escalera fantástica y misteriosa">
+              <div class="image-vignette"></div>
+            </div>
+            <div class="image-caption">
+              <span>PASO A PASO EN LA PENUMBRA</span>
+              <b>Solo aquellos con curiosidad descubren lo que oculta el destino.</b>
+            </div>
+          </div>
+        </div>
+        <div class="floating-quote reveal">“En cada sombra duerme un enigma, y en cada enigma, una invitación.”</div>
+      </section>
+
+      <!-- CAPÍTULO III: LA PROTAGONISTA -->
+      <section class="story-section character-section" data-chapter="III">
+        <div class="character-copy reveal">
+          <p class="eyebrow">CAPÍTULO III · LA DUEÑA DE LA NOCHE</p>
+          <h2>La noche<br>pertenece a <em>Karlet.</em></h2>
+          <p>Quince años de sueños y misterio se entrelazan para dar vida a una celebración irrepetible. Queremos que seas testigo del instante en que la magia se vuelve real.</p>
+          <div class="name-signature">Karlet Alvarado</div>
+        </div>
+        <div class="character-image reveal">
+          <div class="photo-frame">
+            <span class="frame-corner corner-tl"></span>
+            <span class="frame-corner corner-tr"></span>
+            <span class="frame-corner corner-bl"></span>
+            <span class="frame-corner corner-br"></span>
+            <div class="photo-frame-inner">
+              <img src="assets/images/sombrerero.jpg" alt="El Sombrerero en un ambiente enigmático">
+              <div class="image-vignette"></div>
+            </div>
+            <div class="character-badge">UN REINO DE ENIGMAS</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO IV: LA INVITACIÓN SECRETA -->
+      <section class="story-section invitation-section" data-chapter="IV">
+        <div class="invitation-art reveal">
+          <div class="photo-frame">
+            <span class="frame-corner corner-tl"></span>
+            <span class="frame-corner corner-tr"></span>
+            <span class="frame-corner corner-bl"></span>
+            <span class="frame-corner corner-br"></span>
+            <div class="photo-frame-inner">
+              <img src="assets/images/mapa-alicia.jpg" alt="Mapa antiguo y secreto del País de las Maravillas">
+              <div class="image-vignette"></div>
+            </div>
+          </div>
+        </div>
+        <div class="invitation-copy reveal">
+          <p class="eyebrow">CAPÍTULO IV · LA INVITACIÓN SECRETA</p>
+          <h2>Has sido convocado<br>a descifrar <em>este enigma.</em></h2>
+          <p>Tu presencia es la pieza indispensable en este rompecabezas. La cita ha sido sellada y las puertas pronto se abrirán.</p>
+          <button class="outline-button" id="detailsButton">
+            <span>Descubrir coordenadas</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- COORDENADAS Y CUENTA REGRESIVA -->
+      <section class="details-panel" id="detailsPanel">
+        <div class="details-inner">
+          <p class="eyebrow">COORDENADAS DEL ENCUENTRO</p>
+          <h2>El tiempo se detiene<br>para una noche <em>inolvidable.</em></h2>
+          
+          <div class="date-display">
+            <span class="date-day">11</span>
+            <div class="date-meta">
+              <b>DICIEMBRE</b>
+              <small>VIERNES · 2026</small>
+            </div>
+          </div>
+
+          <div class="countdown-wrapper">
+            <div class="countdown" id="countdown">
+              <div class="countdown-box"><strong id="days">000</strong><span>DÍAS</span></div>
+              <div class="countdown-box"><strong id="hours">00</strong><span>HORAS</span></div>
+              <div class="countdown-box"><strong id="minutes">00</strong><span>MINUTOS</span></div>
+              <div class="countdown-box"><strong id="seconds">00</strong><span>SEGUNDOS</span></div>
+            </div>
+          </div>
+
+          <div class="venue-card">
+            <div class="venue-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="venue-info">
+              <small>EL LUGAR DEL ENCUENTRO</small>
+              <h3>Granja Mano Vieja</h3>
+              <p>Te esperamos para vivir este misterio juntos.</p>
+            </div>
+          </div>
+
+          <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Granja+Mano+Vieja" target="_blank" rel="noopener">
+            <span>Abrir ubicación en Google Maps</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO V: LA HORA DECISIVA -->
+      <section class="story-section clock-section" data-chapter="V">
+        <div class="clock-art reveal">
+          <div class="photo-frame">
+            <span class="frame-corner corner-tl"></span>
+            <span class="frame-corner corner-tr"></span>
+            <span class="frame-corner corner-bl"></span>
+            <span class="frame-corner corner-br"></span>
+            <div class="photo-frame-inner">
+              <img src="assets/images/reloj-magico.jpg" alt="Reloj enigmático rodeado de flores y misterio">
+              <div class="image-vignette"></div>
+            </div>
+          </div>
+        </div>
+        <div class="clock-copy reveal">
+          <p class="eyebrow">CAPÍTULO V · LA HORA DECISIVA</p>
+          <h2>Cuando las agujas<br>marquen la <em>hora convenida…</em></h2>
+          <p>No permitas que la medianoche te sorprenda lejos. Cada segundo cuenta antes de que las puertas del misterio se abran para esta noche irrepetible.</p>
+          <div class="time-note">11 · 12 · 2026</div>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO VI: EL DESTINO FINAL -->
+      <section class="story-section castle-section" data-chapter="VI">
+        <div class="castle-image reveal">
+          <div class="photo-frame castle-frame">
+            <span class="frame-corner corner-tl"></span>
+            <span class="frame-corner corner-tr"></span>
+            <span class="frame-corner corner-bl"></span>
+            <span class="frame-corner corner-br"></span>
+            <div class="photo-frame-inner">
+              <img src="assets/images/castillo.jpg" alt="Castillo enigmático entre la bruma">
+              <div class="image-vignette"></div>
+            </div>
+          </div>
+        </div>
+        <div class="castle-copy reveal">
+          <p class="eyebrow">CAPÍTULO FINAL · EL UMBRAL DEL DESTINO</p>
+          <h2>¿Aceptarás ser parte<br>del <em>misterio?</em></h2>
+          <p>Tu presencia completará esta historia. Confirma tu asistencia para asegurar tu lugar en esta noche única.</p>
+          <button class="magic-button" id="rsvpButton">
+            <span>Confirmar asistencia</span>
+            <svg class="btn-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <p class="closing-note">CON CARIÑO, KARLET Y FAMILIA</p>
+        </div>
+      </section>
+
+      <footer>
+        <span>EL MISTERIO APENAS COMIENZA · XV AÑOS</span>
+        <b>K · XV</b>
+      </footer>
+    </section>
+  </main>
+
+  <!-- MODAL DE CONFIRMACIÓN -->
+  <div class="modal-backdrop" id="rsvpModal" aria-hidden="true">
+    <div class="rsvp-modal">
+      <button class="modal-close" id="closeModal" aria-label="Cerrar ventana">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <p class="eyebrow">CONFIRMACIÓN DE ASISTENCIA</p>
+      <h2>¿Nos acompañarás en<br><em>esta noche?</em></h2>
+      
+      <label for="guestName">Tu nombre completo</label>
+      <input id="guestName" type="text" placeholder="Escribe tu nombre" autocomplete="name">
+      
+      <label for="guestCount">¿Cuántas personas asistirán?</label>
+      <select id="guestCount">
+        <option value="1">1 persona</option>
+        <option value="2">2 personas</option>
+        <option value="3">3 personas</option>
+        <option value="4">4 personas</option>
+        <option value="5">5 personas</option>
+      </select>
+      
+      <div class="attendance-choice">
+        <button type="button" class="choice active" data-answer="¡Sí, allí estaré!">¡Sí, asistiré!</button>
+        <button type="button" class="choice" data-answer="Lo siento, no podré asistir.">No podré asistir</button>
+      </div>
+
+      <button class="magic-button send-rsvp" id="sendRsvp">
+        <span>Enviar confirmación</span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+      <small class="modal-hint">Tu respuesta se abrirá directamente en WhatsApp.</small>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">El misterio te da la bienvenida</div>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1480 @@
+/* ==========================================================================
+   LOS XV DE KARLET - TEMA MISTERIO & ENIGMA
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. RESET & VARIABLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --ink: #07060b;
+  --ink-deep: #0d0a14;
+  --ink-surface: #14111d;
+  --ink-card: #1c1829;
+  --gold: #cfab68;
+  --gold-bright: #ecd79b;
+  --gold-muted: #8f764a;
+  --gold-dark: #5c4a2a;
+  --paper: #ede5d8;
+  --paper-dim: #b8ac9a;
+  --wine: #3c1424;
+  --wine-soft: rgba(60, 20, 36, 0.4);
+  --shadow-deep: 0 25px 60px rgba(0, 0, 0, 0.85);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--ink);
+  color-scheme: dark;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body {
+  background-color: var(--ink);
+  color: var(--paper);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, a, input, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   2. FONDO MISTERIOSO: ATMÓSFERA Y NIEBLA DRIFT
+   -------------------------------------------------------------------------- */
+.ambient {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+  z-index: -2;
+  background: radial-gradient(ellipse at 50% 15%, #1d152c 0%, #0d0a15 50%, #050409 100%);
+  pointer-events: none;
+}
+
+.mist-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.55;
+  filter: blur(40px);
+}
+
+.mist-layer {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: 
+    radial-gradient(ellipse at 25% 35%, rgba(85, 45, 95, 0.28) 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 65%, rgba(160, 115, 55, 0.22) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 85%, rgba(45, 20, 55, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(35, 45, 80, 0.25) 0%, transparent 45%);
+  animation: mistDrift 45s ease-in-out infinite alternate;
+}
+
+.mist-layer-two {
+  animation: mistDriftReverse 60s ease-in-out infinite alternate;
+  opacity: 0.6;
+  background: 
+    radial-gradient(ellipse at 70% 30%, rgba(135, 95, 45, 0.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 30% 70%, rgba(70, 30, 80, 0.25) 0%, transparent 50%);
+}
+
+@keyframes mistDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-5%, 4%) scale(1.08); }
+  100% { transform: translate(4%, -5%) scale(1.03); }
+}
+
+@keyframes mistDriftReverse {
+  0% { transform: translate(0, 0) scale(1.05); }
+  50% { transform: translate(6%, -4%) scale(1); }
+  100% { transform: translate(-4%, 5%) scale(1.1); }
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.glow-one {
+  width: 45vw;
+  height: 45vw;
+  background: rgba(145, 105, 50, 0.12);
+  top: 5%;
+  left: 0;
+  animation: pulseGlow 12s ease-in-out infinite alternate;
+}
+
+.glow-two {
+  width: 50vw;
+  height: 50vw;
+  background: rgba(65, 30, 75, 0.16);
+  right: 0;
+  bottom: 10%;
+  animation: pulseGlow 16s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.1; transform: scale(1); }
+  100% { opacity: 0.22; transform: scale(1.15); }
+}
+
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8), inset 0 0 220px rgba(3, 2, 6, 0.95);
+}
+
+.cursor-glow {
+  position: fixed;
+  pointer-events: none;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(207, 171, 104, 0.08), transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+
+/* --------------------------------------------------------------------------
+   3. BOTÓN DE MÚSICA
+   -------------------------------------------------------------------------- */
+.sound-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 40;
+  background: rgba(18, 14, 25, 0.82);
+  border: 1px solid rgba(207, 171, 104, 0.45);
+  color: var(--gold);
+  border-radius: 30px;
+  padding: 8px 14px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font: 11px/1 "Marcellus", serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.35s ease;
+}
+
+.sound-toggle:hover {
+  background: rgba(30, 24, 42, 0.95);
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 18px rgba(207, 171, 104, 0.35);
+  transform: translateY(-1px);
+}
+
+.sound-icon {
+  display: inline-block;
+  color: var(--gold);
+  transition: transform 0.3s ease;
+}
+
+.sound-toggle.playing .sound-icon {
+  animation: soundPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes soundPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--gold)); }
+  50% { transform: scale(1.22); filter: drop-shadow(0 0 8px var(--gold-bright)); }
+}
+
+/* --------------------------------------------------------------------------
+   4. MARCOS DE FOTOS (PHOTO FRAMES CON TOQUE GÓTICO / VINTAGE)
+   -------------------------------------------------------------------------- */
+.photo-frame {
+  position: relative;
+  background: linear-gradient(150deg, #221d30, #110e1a 70%, #0c0914);
+  border: 1px solid rgba(207, 171, 104, 0.35);
+  border-radius: 4px;
+  padding: 9px;
+  box-shadow: var(--shadow-deep), 0 0 25px rgba(207, 171, 104, 0.06);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
+}
+
+.photo-frame:hover {
+  box-shadow: var(--shadow-deep), 0 0 35px rgba(207, 171, 104, 0.18);
+}
+
+.photo-frame-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  border: 1px solid rgba(207, 171, 104, 0.18);
+  background: #09080e;
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.8s ease;
+}
+
+.photo-frame:hover img {
+  transform: scale(1.03);
+}
+
+.image-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 45px rgba(7, 6, 11, 0.75);
+  pointer-events: none;
+}
+
+/* Esquinas ornamentales victorianas / góticas */
+.frame-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--gold);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.corner-tl { top: 4px; left: 4px; border-width: 1.5px 0 0 1.5px; }
+.corner-tr { top: 4px; right: 4px; border-width: 1.5px 1.5px 0 0; }
+.corner-bl { bottom: 4px; left: 4px; border-width: 0 0 1.5px 1.5px; }
+.corner-br { bottom: 4px; right: 4px; border-width: 0 1.5px 1.5px 0; }
+
+/* --------------------------------------------------------------------------
+   5. PORTAL DE ENTRADA
+   -------------------------------------------------------------------------- */
+.portal-screen {
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 30px 18px;
+  background: 
+    linear-gradient(rgba(7, 6, 12, 0.86), rgba(7, 6, 12, 0.94)),
+    url("../assets/images/portada-karlet.jpg") center 30% / cover no-repeat;
+  overflow: hidden;
+}
+
+.portal-frame {
+  width: min(580px, calc(100vw - 36px));
+  max-width: 100%;
+  text-align: center;
+  padding: 48px 30px 42px;
+  position: relative;
+  background: linear-gradient(160deg, rgba(26, 21, 38, 0.9), rgba(12, 10, 19, 0.95));
+  border: 1px solid rgba(207, 171, 104, 0.45);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(207, 171, 104, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: portalFadeIn 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes portalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.portal-topline, .portal-foot, .eyebrow, .chapter, footer span {
+  font-family: "Marcellus", serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.keyhole-wrap {
+  margin: 18px 0 14px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyhole-svg {
+  color: var(--gold);
+  filter: drop-shadow(0 0 12px rgba(207, 171, 104, 0.6));
+  animation: keyholeGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes keyholeGlow {
+  0% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(207, 171, 104, 0.4)); }
+  100% { transform: scale(1.06); filter: drop-shadow(0 0 18px rgba(236, 215, 155, 0.8)); }
+}
+
+.portal-frame h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(34px, 7vw, 56px);
+  font-weight: 500;
+  line-height: 1.05;
+  margin: 16px 0 14px;
+  color: var(--paper);
+}
+
+.portal-frame h1 em, h2 em {
+  color: var(--gold-bright);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.portal-copy {
+  font-size: clamp(17px, 3.8vw, 20px);
+  color: var(--paper-dim);
+  max-width: 440px;
+  margin: 0 auto 28px;
+  line-height: 1.5;
+}
+
+.portal-foot {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  margin-top: 32px;
+  color: var(--gold-muted);
+}
+
+/* --------------------------------------------------------------------------
+   6. BOTONES PRINCIPALES (MAGIC & OUTLINE)
+   -------------------------------------------------------------------------- */
+.magic-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 52px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #a88143 0%, #dfbf78 50%, #997237 100%);
+  color: #120e17;
+  border: 1px solid var(--gold-bright);
+  border-radius: 2px;
+  font-family: "Marcellus", serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(207, 171, 104, 0.3);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
+}
+
+.magic-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(207, 171, 104, 0.55);
+  filter: brightness(1.1);
+}
+
+.magic-button:active {
+  transform: translateY(0);
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.magic-button:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.outline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 12px 24px;
+  background: rgba(22, 18, 30, 0.6);
+  border: 1px solid rgba(207, 171, 104, 0.45);
+  color: var(--gold-bright);
+  font-family: "Marcellus", serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  margin-top: 24px;
+  transition: all 0.35s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.outline-button:hover {
+  background: rgba(35, 28, 48, 0.9);
+  border-color: var(--gold-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(207, 171, 104, 0.25);
+}
+
+.outline-button svg {
+  transition: transform 0.3s ease;
+}
+
+.outline-button:hover svg {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   7. EXPERIENCIA PRINCIPAL & NAVEGACIÓN
+   -------------------------------------------------------------------------- */
+.hidden {
+  display: none !important;
+}
+
+.experience {
+  max-width: 1360px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.story-nav {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 clamp(18px, 5vw, 70px);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(10, 8, 15, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(207, 171, 104, 0.22);
+}
+
+.nav-mark {
+  font-family: "Marcellus", serif;
+  font-size: 18px;
+  color: var(--gold);
+  white-space: nowrap;
+  letter-spacing: 2px;
+}
+
+.nav-mark span {
+  font-size: 11px;
+  color: var(--paper-dim);
+}
+
+.nav-progress {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-progress i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-muted), var(--gold-bright));
+  transition: width 0.25s ease-out;
+}
+
+.chapter {
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   8. ESTRUCTURA DE LAS SECCIONES
+   -------------------------------------------------------------------------- */
+.story-section {
+  min-height: 80vh;
+  padding: clamp(70px, 9vw, 130px) clamp(20px, 8vw, 120px);
+  display: flex;
+  align-items: center;
+  gap: clamp(35px, 6vw, 90px);
+  position: relative;
+}
+
+.hero-story {
+  min-height: calc(100dvh - 60px);
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.hero-image-wrap {
+  width: 46%;
+  max-width: 410px;
+  margin: 0 auto;
+}
+
+.hero-image-wrap .photo-frame-inner img {
+  aspect-ratio: 2/3;
+}
+
+.hero-stamp {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(16, 13, 23, 0.94);
+  border: 1px solid var(--gold);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.stamp-sub {
+  font-family: "Marcellus", serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--gold-muted);
+}
+
+.stamp-title {
+  font-family: "Marcellus", serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold-bright);
+}
+
+.hero-intro {
+  max-width: 500px;
+}
+
+.hero-intro h2,
+.section-heading h2,
+.character-copy h2,
+.invitation-copy h2,
+.clock-copy h2,
+.castle-copy h2,
+.details-inner h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(34px, 5.2vw, 68px);
+  font-weight: 500;
+  line-height: 1.05;
+  margin: 18px 0 16px;
+  color: var(--paper);
+}
+
+.hero-intro > p:not(.eyebrow),
+.character-copy > p:not(.eyebrow),
+.invitation-copy > p:not(.eyebrow),
+.clock-copy > p:not(.eyebrow),
+.castle-copy > p:not(.eyebrow) {
+  font-size: clamp(18px, 2.4vw, 22px);
+  line-height: 1.55;
+  color: var(--paper-dim);
+}
+
+.scroll-cue {
+  margin-top: 45px;
+  font-family: "Marcellus", serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--gold-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scroll-cue span {
+  height: 32px;
+  width: 1px;
+  background: var(--gold);
+  animation: scrollPulse 1.8s infinite;
+}
+
+@keyframes scrollPulse {
+  0% { transform: scaleY(0.2); transform-origin: top; opacity: 0.3; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  100% { transform: scaleY(0.2); transform-origin: bottom; opacity: 0.3; }
+}
+
+/* --------------------------------------------------------------------------
+   9. CAPÍTULO II: EL SENDERO (WONDER)
+   -------------------------------------------------------------------------- */
+.wonder-section {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.section-heading {
+  align-self: center;
+}
+
+.image-story {
+  width: 100%;
+  max-width: 440px;
+  justify-self: end;
+}
+
+.image-story .photo-frame-inner img {
+  aspect-ratio: 3/4;
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px;
+  background: linear-gradient(transparent, rgba(7, 6, 12, 0.95) 70%);
+  display: grid;
+  gap: 6px;
+}
+
+.image-caption span {
+  font-family: "Marcellus", serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.image-caption b {
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--paper);
+}
+
+.floating-quote {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--gold-bright);
+  font-size: clamp(23px, 3.5vw, 38px);
+  font-style: italic;
+  line-height: 1.35;
+  margin-top: 20px;
+  padding: 0 15px;
+}
+
+/* --------------------------------------------------------------------------
+   10. CAPÍTULO III: LA PROTAGONISTA (CHARACTER)
+   -------------------------------------------------------------------------- */
+.character-section {
+  background: linear-gradient(90deg, rgba(23, 18, 32, 0.6), transparent);
+}
+
+.character-copy {
+  flex: 1;
+}
+
+.name-signature {
+  font-size: clamp(30px, 4.5vw, 44px);
+  color: var(--gold-bright);
+  font-style: italic;
+  margin-top: 32px;
+  position: relative;
+  display: inline-block;
+}
+
+.name-signature::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.character-image {
+  width: 40%;
+  max-width: 400px;
+  position: relative;
+}
+
+.character-image .photo-frame-inner img {
+  aspect-ratio: 3/4;
+  object-position: top center;
+}
+
+.character-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(14, 11, 20, 0.92);
+  border: 1px solid rgba(207, 171, 104, 0.4);
+  padding: 8px 12px;
+  font-family: "Marcellus", serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  backdrop-filter: blur(8px);
+}
+
+/* --------------------------------------------------------------------------
+   11. CAPÍTULO IV: LA INVITACIÓN SECRETA
+   -------------------------------------------------------------------------- */
+.invitation-section {
+  background: linear-gradient(135deg, rgba(28, 22, 38, 0.75), rgba(16, 12, 24, 0.9));
+  border-block: 1px solid rgba(207, 171, 104, 0.2);
+}
+
+.invitation-art {
+  width: 40%;
+  max-width: 390px;
+}
+
+.invitation-art .photo-frame-inner img {
+  aspect-ratio: 2/3;
+}
+
+.invitation-copy {
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   12. DETALLES Y CUENTA REGRESIVA
+   -------------------------------------------------------------------------- */
+.details-panel {
+  padding: clamp(70px, 9vw, 110px) 20px;
+  background: radial-gradient(ellipse at center, rgba(38, 29, 48, 0.9), rgba(11, 9, 17, 0.98) 75%);
+  text-align: center;
+  border-block: 1px solid rgba(207, 171, 104, 0.25);
+  position: relative;
+}
+
+.details-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.date-display {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin: 40px auto 32px;
+  padding: 12px 28px;
+  border-block: 1px solid rgba(207, 171, 104, 0.3);
+  background: rgba(18, 14, 25, 0.5);
+}
+
+.date-day {
+  font-family: "Marcellus", serif;
+  font-size: clamp(72px, 11vw, 98px);
+  line-height: 0.85;
+  color: var(--gold-bright);
+}
+
+.date-meta {
+  text-align: left;
+  display: grid;
+  gap: 4px;
+}
+
+.date-meta b {
+  font-family: "Marcellus", serif;
+  font-size: 16px;
+  letter-spacing: 3px;
+  color: var(--paper);
+}
+
+.date-meta small {
+  font-family: "Marcellus", serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold-muted);
+}
+
+/* Cuenta regresiva adaptada a teléfono */
+.countdown-wrapper {
+  max-width: 460px;
+  margin: 20px auto 45px;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.countdown-box {
+  background: linear-gradient(150deg, rgba(28, 23, 38, 0.85), rgba(14, 11, 20, 0.95));
+  border: 1px solid rgba(207, 171, 104, 0.35);
+  border-radius: 3px;
+  padding: 14px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.countdown-box strong {
+  font-family: "Marcellus", serif;
+  font-size: clamp(24px, 5.5vw, 38px);
+  line-height: 1;
+  color: var(--gold-bright);
+}
+
+.countdown-box span {
+  font-family: "Marcellus", serif;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--gold-muted);
+}
+
+.venue-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: left;
+  border: 1px solid rgba(207, 171, 104, 0.25);
+  background: rgba(18, 14, 25, 0.7);
+  padding: 24px 28px;
+  border-radius: 3px;
+  margin-bottom: 28px;
+}
+
+.venue-icon-wrap {
+  color: var(--gold);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.venue-info small {
+  font-family: "Marcellus", serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.venue-info h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 600;
+  margin: 4px 0 6px;
+  color: var(--paper);
+}
+
+.venue-info p {
+  color: var(--paper-dim);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.map-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold-bright);
+  font-family: "Marcellus", serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 6px;
+  transition: all 0.3s ease;
+}
+
+.map-button:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   13. CAPÍTULO V: EL RELOJ
+   -------------------------------------------------------------------------- */
+.clock-section {
+  flex-direction: row-reverse;
+}
+
+.clock-art {
+  width: 40%;
+  max-width: 380px;
+}
+
+.clock-art .photo-frame-inner img {
+  aspect-ratio: 9/16;
+}
+
+.clock-copy {
+  flex: 1;
+}
+
+.time-note {
+  font-family: "Marcellus", serif;
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  margin-top: 36px;
+}
+
+/* --------------------------------------------------------------------------
+   14. CAPÍTULO VI: EL CASTILLO Y CIERRE
+   -------------------------------------------------------------------------- */
+.castle-section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-bottom: 100px;
+}
+
+.castle-image {
+  width: min(100%, 560px);
+  margin: 0 auto 45px;
+}
+
+.castle-frame .photo-frame-inner img {
+  aspect-ratio: 3/4;
+  max-height: 580px;
+}
+
+.castle-copy {
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.castle-copy .magic-button {
+  margin-top: 28px;
+}
+
+.closing-note {
+  font-family: "Marcellus", serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold-muted);
+  margin-top: 48px;
+}
+
+/* --------------------------------------------------------------------------
+   15. PIE DE PÁGINA
+   -------------------------------------------------------------------------- */
+footer {
+  border-top: 1px solid rgba(207, 171, 104, 0.22);
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  color: var(--gold);
+}
+
+footer span {
+  font-size: 9px;
+}
+
+footer b {
+  font-family: "Marcellus", serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--gold-bright);
+}
+
+/* --------------------------------------------------------------------------
+   16. EFECTOS REVEAL Y TAP RIPPLE
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Toque en pantalla: onda sutil dorada sin emojis */
+.tap-ripple {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(207, 171, 104, 0.65);
+  background: radial-gradient(circle, rgba(207, 171, 104, 0.22) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(1);
+  animation: rippleFade 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes rippleFade {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(5);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   17. MODAL DE CONFIRMACIÓN (RSVP)
+   -------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(4, 3, 7, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.rsvp-modal {
+  position: relative;
+  width: min(480px, 100%);
+  max-height: 90dvh;
+  overflow-y: auto;
+  padding: 38px 28px 32px;
+  background: linear-gradient(160deg, #1f1a2e, #100d1a);
+  border: 1px solid rgba(207, 171, 104, 0.5);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.95);
+  border-radius: 3px;
+  transform: translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.modal-backdrop.open .rsvp-modal {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+.modal-close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.rsvp-modal h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(30px, 6vw, 40px);
+  font-weight: 500;
+  margin: 12px 0 22px;
+  line-height: 1.1;
+  color: var(--paper);
+}
+
+.rsvp-modal label {
+  display: block;
+  color: var(--paper-dim);
+  font-size: 15px;
+  margin: 16px 0 8px;
+}
+
+.rsvp-modal input,
+.rsvp-modal select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  background: #09080e;
+  border: 1px solid rgba(207, 171, 104, 0.4);
+  color: var(--paper);
+  border-radius: 2px;
+  outline: none;
+  font-size: 16px; /* Evita auto-zoom en iOS Safari */
+  transition: border-color 0.3s ease;
+}
+
+.rsvp-modal input:focus,
+.rsvp-modal select:focus {
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 12px rgba(207, 171, 104, 0.25);
+}
+
+.attendance-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 22px 0 24px;
+}
+
+.choice {
+  min-height: 46px;
+  padding: 10px 12px;
+  background: rgba(14, 11, 20, 0.8);
+  border: 1px solid rgba(207, 171, 104, 0.35);
+  color: var(--paper-dim);
+  font-family: "Marcellus", serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.choice.active {
+  background: var(--gold);
+  color: #110e17;
+  border-color: var(--gold-bright);
+  font-weight: 600;
+}
+
+.send-rsvp {
+  width: 100%;
+}
+
+.modal-hint {
+  display: block;
+  text-align: center;
+  color: var(--gold-muted);
+  margin-top: 14px;
+  font-size: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   18. TOAST NOTIFICACIONES
+   -------------------------------------------------------------------------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translate(-50%, 30px);
+  background: linear-gradient(135deg, #1d182b, #120e1c);
+  border: 1px solid var(--gold);
+  color: var(--gold-bright);
+  padding: 12px 24px;
+  z-index: 60;
+  font-family: "Marcellus", serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* ==========================================================================
+   19. ADAPTACIÓN PARA TELÉFONO (MOBILE RESPONSIVE FIRST-CLASS)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Barra superior y controles */
+  .sound-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 7px 11px;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .story-nav {
+    height: 52px;
+    padding: 0 14px;
+    gap: 12px;
+  }
+
+  .nav-mark {
+    font-size: 16px;
+  }
+
+  .chapter {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+  /* Portal de entrada en móvil */
+  .portal-screen {
+    padding: 24px 14px;
+  }
+
+  .portal-frame {
+    padding: 38px 20px 30px;
+  }
+
+  .portal-frame h1 {
+    font-size: clamp(30px, 8.5vw, 44px);
+    margin: 14px 0 12px;
+  }
+
+  .portal-copy {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .magic-button {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 20px;
+    font-size: 11px;
+  }
+
+  /* Estructura general de secciones en vertical */
+  .story-section {
+    min-height: auto;
+    padding: 60px 18px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 34px;
+    text-align: center;
+  }
+
+  .hero-story {
+    min-height: auto;
+    padding-top: 40px;
+    padding-bottom: 50px;
+  }
+
+  .hero-image-wrap {
+    width: min(88%, 340px);
+  }
+
+  .hero-stamp {
+    bottom: 12px;
+    right: 12px;
+    padding: 8px 12px;
+  }
+
+  .hero-intro h2,
+  .section-heading h2,
+  .character-copy h2,
+  .invitation-copy h2,
+  .clock-copy h2,
+  .castle-copy h2,
+  .details-inner h2 {
+    font-size: clamp(32px, 8.8vw, 44px);
+    margin: 14px 0 12px;
+  }
+
+  .hero-intro > p:not(.eyebrow),
+  .character-copy > p:not(.eyebrow),
+  .invitation-copy > p:not(.eyebrow),
+  .clock-copy > p:not(.eyebrow),
+  .castle-copy > p:not(.eyebrow) {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .scroll-cue {
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  /* Wonder / Sendero */
+  .wonder-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .image-story {
+    width: min(88%, 360px);
+    margin: 0 auto;
+  }
+
+  .floating-quote {
+    font-size: clamp(21px, 6vw, 27px);
+    margin-top: 8px;
+  }
+
+  /* Character / Sombrerero */
+  .character-section {
+    flex-direction: column-reverse;
+  }
+
+  .character-image {
+    width: min(85%, 340px);
+    margin: 0 auto;
+  }
+
+  .name-signature {
+    margin-top: 24px;
+    font-size: 28px;
+  }
+
+  /* Invitation / Mapa */
+  .invitation-section {
+    flex-direction: column;
+  }
+
+  .invitation-art {
+    width: min(85%, 330px);
+    margin: 0 auto;
+  }
+
+  /* Detalles y cuenta regresiva en móvil */
+  .details-panel {
+    padding: 60px 16px;
+  }
+
+  .date-display {
+    gap: 16px;
+    padding: 10px 18px;
+    margin: 30px auto 25px;
+  }
+
+  .date-day {
+    font-size: 72px;
+  }
+
+  .date-meta b {
+    font-size: 14px;
+  }
+
+  .countdown {
+    gap: 6px;
+  }
+
+  .countdown-box {
+    padding: 10px 4px;
+  }
+
+  .countdown-box strong {
+    font-size: 24px;
+  }
+
+  .countdown-box span {
+    font-size: 7px;
+  }
+
+  .venue-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 22px 18px;
+    gap: 12px;
+  }
+
+  .venue-info h3 {
+    font-size: 26px;
+  }
+
+  /* Reloj */
+  .clock-section {
+    flex-direction: column;
+  }
+
+  .clock-art {
+    width: min(80%, 320px);
+    margin: 0 auto;
+  }
+
+  .time-note {
+    margin-top: 26px;
+    font-size: 12px;
+    letter-spacing: 4px;
+  }
+
+  /* Castillo */
+  .castle-image {
+    width: min(92%, 420px);
+    margin-bottom: 30px;
+  }
+
+  /* Pie de página */
+  footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding: 26px 16px;
+  }
+
+  /* Desactivar cursor glow en pantallas táctiles */
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* Pantallas muy pequeñas (<= 380px) */
+@media (max-width: 380px) {
+  .portal-frame {
+    padding-inline: 14px;
+  }
+
+  .portal-topline {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .countdown-box strong {
+    font-size: 20px;
+  }
+
+  .countdown-box span {
+    font-size: 6.5px;
+  }
+
+  .attendance-choice {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Modo de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
