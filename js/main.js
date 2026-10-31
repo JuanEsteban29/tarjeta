@@ -3,7 +3,7 @@ const $$ = (s) => [...document.querySelectorAll(s)];
 const portal = $("#portal");
 const experience = $("#experience");
 const music = $("#bgMusic");
-let attendance = "¡Sí, allí estaré!";
+let willAttend = true;
 
 // Reproducción automática de música
 let isMusicPlaying = false;
@@ -186,7 +186,11 @@ $$(".choice").forEach((btn) => {
   btn.addEventListener("click", () => {
     $$(".choice").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    attendance = btn.dataset.answer;
+    willAttend = btn.dataset.attending !== "no";
+    const sendBtnLabel = $("#sendRsvp span");
+    if (sendBtnLabel) {
+      sendBtnLabel.textContent = willAttend ? "Enviar confirmación" : "Enviar respuesta";
+    }
   });
 });
 
@@ -202,7 +206,9 @@ $("#sendRsvp").addEventListener("click", () => {
 
   // Número oficial de confirmación (WhatsApp Venezuela: 584145085368)
   const whatsappNumber = "584145085368";
-  const message = `Hola, soy ${name}. ${attendance} Confirmación para los XV de Karlet Alvarado, el 11 de diciembre de 2026 a las 8:00 P.M. en Granja Mano Vieja.`;
+  const message = willAttend
+    ? `Hola, soy ${name}. ¡Confirmo mi asistencia a los XV años de Karlet Alvarado el 11 de diciembre de 2026 a las 8:00 P.M. en Granja Mano Vieja! Allí estaré.`
+    : `Hola, soy ${name}. Muchas gracias por la invitación a los XV años de Karlet Alvarado; lamentablemente no podré asistir en esta ocasión. ¡Les deseo una noche maravillosa!`;
 
   window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
   closeModal();
