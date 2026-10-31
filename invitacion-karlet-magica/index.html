@@ -12,11 +12,46 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- FONDO MISTERIOSO: NIEBLA Y PENUMBRA -->
+  <!-- FONDO MISTERIOSO: ROSAS, CARTAS Y NIEBLA -->
   <div class="ambient" aria-hidden="true">
+    <div class="ambient-bg"></div>
     <div class="mist-wrap">
       <div class="mist-layer"></div>
       <div class="mist-layer mist-layer-two"></div>
+    </div>
+    <div class="floating-elements">
+      <div class="drift-card card-1">
+        <svg viewBox="0 0 60 85" width="46" height="65">
+          <rect x="2" y="2" width="56" height="81" rx="4" fill="#14111d" stroke="#cfab68" stroke-width="1.2"/>
+          <rect x="5" y="5" width="50" height="75" rx="3" fill="none" stroke="#cfab68" stroke-width="0.5" stroke-dasharray="2,2"/>
+          <path d="M30 22 C30 22 20 32 20 40 C20 46 25 50 30 47 C35 50 40 46 40 40 C40 32 30 22 30 22 Z" fill="#cfab68"/>
+          <path d="M28 46 L26 56 L34 56 L32 46 Z" fill="#cfab68"/>
+          <text x="8" y="16" fill="#cfab68" font-size="9" font-family="'Cormorant Garamond', serif">A</text>
+          <text x="48" y="78" fill="#cfab68" font-size="9" font-family="'Cormorant Garamond', serif">A</text>
+        </svg>
+      </div>
+      <div class="drift-card card-2">
+        <svg viewBox="0 0 60 85" width="42" height="60">
+          <rect x="2" y="2" width="56" height="81" rx="4" fill="#181324" stroke="#cfab68" stroke-width="1.2"/>
+          <rect x="5" y="5" width="50" height="75" rx="3" fill="none" stroke="#cfab68" stroke-width="0.5"/>
+          <path d="M30 30 C22 20 16 26 16 34 C16 43 30 54 30 54 C30 54 44 43 44 34 C44 26 38 20 30 30 Z" fill="#841c30"/>
+          <text x="8" y="16" fill="#cfab68" font-size="9" font-family="'Cormorant Garamond', serif">Q</text>
+          <text x="48" y="78" fill="#cfab68" font-size="9" font-family="'Cormorant Garamond', serif">Q</text>
+        </svg>
+      </div>
+      <div class="drift-card card-3">
+        <svg viewBox="0 0 60 85" width="38" height="54">
+          <rect x="2" y="2" width="56" height="81" rx="4" fill="#110e19" stroke="#cfab68" stroke-width="1"/>
+          <rect x="6" y="6" width="48" height="73" fill="none" stroke="#cfab68" stroke-width="0.8"/>
+          <circle cx="30" cy="42" r="12" fill="none" stroke="#cfab68" stroke-width="1"/>
+          <path d="M30 20 L30 64 M16 42 L44 42" stroke="#cfab68" stroke-width="0.8" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="rose-petal petal-1"></div>
+      <div class="rose-petal petal-2"></div>
+      <div class="rose-petal petal-3"></div>
+      <div class="rose-petal petal-4"></div>
+      <div class="rose-petal petal-5"></div>
     </div>
     <div class="glow glow-one"></div>
     <div class="glow glow-two"></div>
@@ -267,6 +302,145 @@
 
       <!-- CAPÍTULO VI: EL DESTINO FINAL -->
       <section class="story-section castle-section" data-chapter="VI">
+
+        <!-- LLUVIA DE SOBRES ANIMADOS -->
+        <div class="envelope-rain" aria-hidden="true">
+          <!-- SVG sobre: cuerpo con solapa en V y pequeño lazo de cera dorada -->
+          <!-- Se reutiliza la misma figura SVG en todos, las clases controlan tamaño/posición -->
+
+          <div class="envelope env-1">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#1c1730" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-2">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#14101f" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-3">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#1a1528" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-4">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#1c1730" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-5">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#14101f" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-6">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#1a1528" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-7">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#1c1730" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-8">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#14101f" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-9">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#1a1528" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-10">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#1c1730" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-11">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#14101f" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <div class="envelope env-12">
+            <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="10" width="78" height="49" rx="3" fill="#1a1528" stroke="#cfab68" stroke-width="1.4"/>
+              <path d="M1 10 L40 38 L79 10" stroke="#cfab68" stroke-width="1.2" fill="none"/>
+              <path d="M1 59 L30 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <path d="M79 59 L50 36" stroke="#cfab68" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="40" cy="38" r="5" fill="#841c30" stroke="#cfab68" stroke-width="0.8"/>
+              <path d="M38 36 Q40 34 42 36 L41.5 40 L40 41 L38.5 40 Z" fill="#cfab68" opacity="0.7"/>
+            </svg>
+          </div>
+        </div>
+        <!-- FIN LLUVIA DE SOBRES -->
         <div class="castle-image reveal">
           <div class="photo-frame castle-frame">
             <span class="frame-corner corner-tl"></span>

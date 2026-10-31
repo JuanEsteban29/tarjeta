@@ -68,7 +68,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   2. FONDO MISTERIOSO: ATMÓSFERA Y NIEBLA DRIFT
+   2. FONDO MISTERIOSO: ROSAS, CARTAS, ATMÓSFERA Y NIEBLA DRIFT
    -------------------------------------------------------------------------- */
 .ambient {
   position: fixed;
@@ -79,8 +79,152 @@ img {
   max-height: 100vh;
   overflow: hidden;
   z-index: -2;
-  background: radial-gradient(ellipse at 50% 15%, #1d152c 0%, #0d0a15 50%, #050409 100%);
+  background-color: #07060b;
   pointer-events: none;
+}
+
+.ambient-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to bottom, rgba(7, 6, 12, 0.72) 0%, rgba(7, 6, 12, 0.5) 30%, rgba(7, 6, 12, 0.6) 70%, rgba(7, 6, 12, 0.85) 100%),
+    url("../assets/images/fondo-misterio-cartas-rosas.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.92;
+}
+
+@media (max-width: 768px) {
+  .ambient-bg {
+    background-image: 
+      linear-gradient(to bottom, rgba(7, 6, 12, 0.68) 0%, rgba(7, 6, 12, 0.48) 30%, rgba(7, 6, 12, 0.58) 70%, rgba(7, 6, 12, 0.82) 100%),
+      url("../assets/images/fondo-misterio-cartas-rosas-mobile.jpg");
+    background-position: center top;
+  }
+}
+
+/* Cartas y pétalos de rosas flotantes */
+.floating-elements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.drift-card {
+  position: absolute;
+  opacity: 0.45;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.9));
+  transition: opacity 0.5s ease;
+}
+
+.card-1 {
+  top: 18%;
+  left: 5%;
+  animation: cardFloat1 22s ease-in-out infinite alternate;
+}
+
+.card-2 {
+  top: 52%;
+  right: 5%;
+  animation: cardFloat2 26s ease-in-out infinite alternate;
+}
+
+.card-3 {
+  bottom: 14%;
+  left: 8%;
+  animation: cardFloat3 30s ease-in-out infinite alternate;
+}
+
+@keyframes cardFloat1 {
+  0% { transform: translateY(0) rotate(-14deg) scale(1); }
+  50% { transform: translateY(-28px) translateX(12px) rotate(-6deg) scale(1.03); }
+  100% { transform: translateY(18px) translateX(-8px) rotate(-18deg) scale(0.98); }
+}
+
+@keyframes cardFloat2 {
+  0% { transform: translateY(0) rotate(16deg) scale(1); }
+  50% { transform: translateY(-32px) translateX(-18px) rotate(8deg) scale(1.04); }
+  100% { transform: translateY(22px) translateX(8px) rotate(20deg) scale(0.96); }
+}
+
+@keyframes cardFloat3 {
+  0% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-22px) translateX(12px) rotate(4deg); }
+  100% { transform: translateY(14px) translateX(-10px) rotate(-12deg); }
+}
+
+/* Pétalos de rosas cayendo suavemente */
+.rose-petal {
+  position: absolute;
+  width: 14px;
+  height: 20px;
+  background: radial-gradient(ellipse at 30% 30%, #8b1c31 0%, #420815 65%, #20030a 100%);
+  border-radius: 50% 50% 50% 0 / 40% 40% 60% 60%;
+  opacity: 0.55;
+  filter: blur(0.4px);
+  pointer-events: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.petal-1 {
+  top: -25px;
+  left: 18%;
+  animation: petalFall 18s linear infinite;
+  animation-delay: 0s;
+}
+
+.petal-2 {
+  top: -25px;
+  left: 42%;
+  animation: petalFall 23s linear infinite;
+  animation-delay: 4.5s;
+  transform: scale(0.85) rotate(35deg);
+}
+
+.petal-3 {
+  top: -25px;
+  left: 68%;
+  animation: petalFall 20s linear infinite;
+  animation-delay: 8s;
+  transform: scale(1.15) rotate(-25deg);
+}
+
+.petal-4 {
+  top: -25px;
+  left: 88%;
+  animation: petalFall 26s linear infinite;
+  animation-delay: 2.5s;
+  transform: scale(0.75) rotate(55deg);
+}
+
+.petal-5 {
+  top: -25px;
+  left: 8%;
+  animation: petalFall 22s linear infinite;
+  animation-delay: 11s;
+  transform: scale(0.95) rotate(-40deg);
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(105vh) translateX(50px) rotate(340deg);
+    opacity: 0;
+  }
 }
 
 .mist-wrap {
@@ -89,7 +233,7 @@ img {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  opacity: 0.55;
+  opacity: 0.38;
   filter: blur(40px);
 }
 
@@ -301,8 +445,8 @@ img {
   position: relative;
   padding: 30px 18px;
   background: 
-    linear-gradient(rgba(7, 6, 12, 0.86), rgba(7, 6, 12, 0.94)),
-    url("../assets/images/portada-karlet.jpg") center 30% / cover no-repeat;
+    linear-gradient(rgba(7, 6, 12, 0.78), rgba(7, 6, 12, 0.88)),
+    url("../assets/images/fondo-misterio-cartas-rosas.jpg") center center / cover no-repeat;
   overflow: hidden;
 }
 
@@ -985,6 +1129,81 @@ img {
   flex-direction: column;
   text-align: center;
   padding-bottom: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   LLUVIA DE SOBRES - SECCIÓN FINAL
+   -------------------------------------------------------------------------- */
+.envelope-rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.envelope {
+  position: absolute;
+  top: -120px;
+  animation: envelopeFall linear infinite;
+  will-change: transform, opacity;
+}
+
+.envelope svg {
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.8));
+}
+
+/* 12 sobres con posiciones, tamaños y tiempos variados */
+.env-1  { left:  4%; animation-duration: 14s; animation-delay:  0s;   opacity: 0.75; }
+.env-2  { left: 12%; animation-duration: 19s; animation-delay: -5s;   opacity: 0.55; }
+.env-3  { left: 22%; animation-duration: 16s; animation-delay: -2s;   opacity: 0.70; }
+.env-4  { left: 31%; animation-duration: 21s; animation-delay: -9s;   opacity: 0.60; }
+.env-5  { left: 42%; animation-duration: 15s; animation-delay: -3s;   opacity: 0.80; }
+.env-6  { left: 52%; animation-duration: 23s; animation-delay: -7s;   opacity: 0.50; }
+.env-7  { left: 61%; animation-duration: 17s; animation-delay: -1s;   opacity: 0.72; }
+.env-8  { left: 70%; animation-duration: 20s; animation-delay: -11s;  opacity: 0.65; }
+.env-9  { left: 78%; animation-duration: 13s; animation-delay: -4s;   opacity: 0.78; }
+.env-10 { left: 86%; animation-duration: 18s; animation-delay: -8s;   opacity: 0.58; }
+.env-11 { left: 93%; animation-duration: 22s; animation-delay: -6s;   opacity: 0.68; }
+.env-12 { left: 35%; animation-duration: 12s; animation-delay: -13s;  opacity: 0.62; }
+
+/* Tamaños variados para profundidad */
+.env-1  svg, .env-5  svg, .env-9  svg { width: 52px; height: 40px; }
+.env-2  svg, .env-6  svg, .env-10 svg { width: 36px; height: 28px; }
+.env-3  svg, .env-7  svg, .env-11 svg { width: 44px; height: 34px; }
+.env-4  svg, .env-8  svg, .env-12 svg { width: 30px; height: 23px; }
+
+@keyframes envelopeFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(-12deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: inherit;
+  }
+  40% {
+    transform: translateY(40vh) translateX(25px) rotate(6deg);
+  }
+  70% {
+    transform: translateY(72vh) translateX(-18px) rotate(-8deg);
+  }
+  92% {
+    opacity: inherit;
+  }
+  100% {
+    transform: translateY(115vh) translateX(12px) rotate(4deg);
+    opacity: 0;
+  }
+}
+
+/* Los elementos de contenido de la sección castillo deben estar por encima de los sobres */
+.castle-image,
+.castle-copy {
+  position: relative;
+  z-index: 1;
 }
 
 .castle-image {
