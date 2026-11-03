@@ -207,7 +207,7 @@ $("#sendRsvp").addEventListener("click", () => {
   // Número oficial de confirmación (WhatsApp Venezuela: 584145085368)
   const whatsappNumber = "584145085368";
   const message = willAttend
-    ? `Hola, soy ${name}. ¡Confirmo mi asistencia a los XV años de Karlet Alvarado el 11 de diciembre de 2026 a las 8:00 P.M. en Granja Mano Vieja! Allí estaré.`
+    ? `Hola, soy ${name}. ¡Confirmo mi asistencia a los XV años de Karlet Alvarado el 11 de diciembre de 2026 (de 8:00 P.M. a 3:00 A.M.) en Granja Mano Vieja! Allí estaré.`
     : `Hola, soy ${name}. Muchas gracias por la invitación a los XV años de Karlet Alvarado; lamentablemente no podré asistir en esta ocasión. ¡Les deseo una noche maravillosa!`;
 
   window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
